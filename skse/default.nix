@@ -15,9 +15,9 @@ stdenv.mkDerivation rec {
   unpackPhase = "7z x $src";
 
   installPhase = ''
-    mkdir -p $out/skyrim-modded
-    cp -r sks*/* $out/skyrim-modded/
-    rm -rf $out/skyrim-modded/src
+    mkdir -p $out/skyrim-se-modded
+    cp -r sks*/* $out/skyrim-se-modded/
+    rm -rf $out/skyrim-se-modded/src
   '';
 
   meta = with lib; {

@@ -14,7 +14,7 @@
     pkgs.buildEnv {
       name = "my-packages";
       paths = [
-        (pkgs.callPackage ./SkyrimSE { })
+        (pkgs.callPackage ./SkyrimAE { })
         (pkgs.callPackage ./SKSE { })
         (pkgs.callPackage ./SkyUI { })
       ];

@@ -15,7 +15,7 @@
       name = "my-packages";
       paths = [
         (pkgs.callPackage ./SkyrimSE { })
-        (pkgs.callPackage ./skse { })
+        (pkgs.callPackage ./SKSE { })
         (pkgs.callPackage ./SkyUI { })
       ];
       ignoreCollisions= true;

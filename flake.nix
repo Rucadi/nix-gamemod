@@ -19,6 +19,8 @@
         (pkgs.callPackage ./USSEP { })
         (pkgs.callPackage ./Alternate-Start { })
         (pkgs.callPackage ./SkyUI { })
+        (pkgs.callPackage ./AdressLibrarySKSEPlugins { })
+        (pkgs.callPackage ./SSEEngineFixes { })
       ];
       ignoreCollisions= true;
     };

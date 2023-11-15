@@ -5,7 +5,7 @@ source $stdenv/setup
 
 get_dl_url() {
 url=$(curl -s  'https://www.nexusmods.com/Core/Libs/Common/Managers/Downloads?GenerateDownloadUrl' \
-  -H "$cookie" \
+  -H 'cookie: '"$cookie" \
   -H 'authority: www.nexusmods.com' \
   -H 'accept: */*' \
   -H 'accept-language: en-US,en;q=0.7' \
@@ -34,14 +34,22 @@ url=$(curl -s  'https://www.nexusmods.com/Core/Libs/Common/Managers/Downloads?Ge
 }
 
 # Example usage:
-cookie=''
-mod_id="104737"
-file_id="442608"
-game_name="skyrimspecialedition"
-game_id="1704" #skyrim
+#cookie=''
+#mod_id="104737"
+#file_id="442608"
+#game_name="skyrimspecialedition"
+#game_id="1704" #skyrim
 
 download_url=$(get_dl_url)
+
+echo "Downloading from url: "
 cleaned_filename=$(sed "s/\?.*//g" <<< "$download_url")
 filename=$(basename "$cleaned_filename") 
 mkdir -p $out
-curl -o "$out/$filename" "$(sed "s/ /%20/g" <<< "$download_url")"
+
+
+prepared_url="$(sed "s/ /%20/g" <<< "$download_url")"
+echo "$prepared_url" 2>&1
+curl -o "$out/$filename" "$prepared_url"
+
+

@@ -1,16 +1,18 @@
 { 
   pkgs ? import <nixpkgs> {} 
   ,
-  game_id ? ""
+  game_id ? "1704"#skyrim se default
   ,
   mod_id ? ""
   ,
   file_id ? ""
   ,
-  game_name ? ""
+  sha256 ? ""
+  ,
+  game_name ? "skyrimspecialedition" #skyrim se default
   ,
   cookie ? ""
-  }:
+}:
 let
   inherit (pkgs) lib fetchurl libarchive stdenv p7zip makeWrapper;
 in
@@ -19,23 +21,37 @@ in
 stdenv.mkDerivation rec {
   
   nativeBuildInputs = [pkgs.jq pkgs.curl pkgs.cacert pkgs.gnused];
-  sha256 = "sha256-xfloXe9NcLCdoU+CjRxtppMAur+yReLnw4JmEnPAQS0="; # You need to replace this with the actual hash of the downloaded file.
   SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
 
   pname = "NexusDownload";
-  requiredInputs = [ "game_id" "mod_id" "file_id" "game_name" "cookie" ];
+  requiredInputs = [ "game_id" "mod_id" "file_id" "game_name" ];
 
-
+  impureEnvVars = "cookie";
   outputHashAlgo = "sha256";
   outputHashMode = "recursive";
   outputHash = sha256;
 
   version = "1";
+  buildInputs = [ (pkgs.writeText "envars.srcsh" ''
+                                                export cookie='${cookie}'
+                                                export game_id=${game_id}
+                                                export mod_id=${mod_id}
+                                                export file_id=${file_id}
+                                                export game_name=${game_name}
+                                                '') ];
+  shellHook = ''
+    source $(cat $PWD/envars.srcsh)
+  '';
+  preFixup = ''
+    # Remove the cookie after it's no longer needed
+    rm $out/envars.srcsh
+    rm $out/env-vars
+  '';
   builder = ./downloadFromNexus.sh;
   dontUnpack = true;
   meta = with lib; {
-    description = "Skyrim SkyUI";
-    license = licenses.unfree;
+    description = "nexus downloader";
+    license = licenses.mit;
   };
 
   passthru = {

@@ -1,13 +1,16 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {} ,
+  downloader ? ../nexusmods}:
 let
   inherit (pkgs) lib fetchurl libarchive stdenv p7zip makeWrapper;
 in
 stdenv.mkDerivation rec {
   pname = "USSEP";
   version = "";
-  src = fetchurl {
-    url = "http://localhost:8000/Unofficial%20Skyrim%20Special%20Edition%20Patch-266-4-2-9a-1685216241.7z";
-    sha256 = "sha256-aJGA2oyQnTQCo+rhR8NSGTi3cq3fbtdpNzgdPayW8TE="; # You need to replace this with the actual hash of the downloaded file.
+
+  src = pkgs.callPackage downloader {
+    mod_id="266";
+    file_id="392477";
+    sha256 = "sha256-pjavXj0UjSPUiSwTzCbhc0WNhuKyHKJZG/9oGXaIkFk="; # You need to replace this with the actual hash of the downloaded file.
   };
 
   nativeBuildInputs = [ libarchive p7zip];

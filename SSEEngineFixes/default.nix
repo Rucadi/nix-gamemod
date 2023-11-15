@@ -29,9 +29,12 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/skyrim-se-modded/Data
+    mv data/skse/plugins data/skse/Plugins
+    mv data/skse data/SKSE
     mv data/* $out/skyrim-se-modded/Data
     rm -rf data
     mv *dll $out/skyrim-se-modded
+    
   '';
 
   meta = with lib; {

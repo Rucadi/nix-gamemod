@@ -29,6 +29,10 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/skyrim-se-modded/Data
+    ##patch tbbmalloc out
+
+    echo UseTBBMalloc=false >> data/skse/plugins/EngineFixes.toml
+    
     mv data/skse/plugins data/skse/Plugins
     mv data/skse data/SKSE
     mv data/* $out/skyrim-se-modded/Data

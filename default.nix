@@ -12,9 +12,7 @@ pkgs.buildEnv {
         (pkgs.callPackage ./BetterMessageBoxControls { })# conflicts with racemenu
         (pkgs.callPackage ./BetterDialogueControls { }) 
         (pkgs.callPackage ./SMIM { })
-        (pkgs.callPackage ./SKYRIM202X_part3 { })
-        (pkgs.callPackage ./SKYRIM202X_part2 { })
-        (pkgs.callPackage ./SKYRIM202X_part1 { })
+        (pkgs.callPackage ./SKYRIM202X_full { })
         (pkgs.callPackage ./Alternate-Start { })
         (pkgs.callPackage ./RaceMenu { })
         (pkgs.callPackage ./SSEEngineFixes { })

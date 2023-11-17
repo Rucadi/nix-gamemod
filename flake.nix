@@ -14,14 +14,16 @@
     pkgs.buildEnv {
       name = "my-packages";
       paths = [
-        (pkgs.callPackage ./SMIM { })
-        (pkgs.callPackage ./SKYRIM202X { })
-        (pkgs.callPackage ./Alternate-Start { })
-        (pkgs.callPackage ./SkyUI { })
-        (pkgs.callPackage ./SSEEngineFixes { })
-        (pkgs.callPackage ./AdressLibrarySKSEPlugins { })
+        #(pkgs.callPackage ./SMIM { })
+       #(pkgs.callPackage ./SKYRIM202X_part3 { })
+        (pkgs.callPackage ./SKYRIM202X_part2 { })
+        #(pkgs.callPackage ./SKYRIM202X_part1 { })
+        #(pkgs.callPackage ./Alternate-Start { })
+        #(pkgs.callPackage ./SkyUI { })
+        #(pkgs.callPackage ./SSEEngineFixes { })
+        #(pkgs.callPackage ./AdressLibrarySKSEPlugins { })
+        #(pkgs.callPackage ./USSEP { })
         (pkgs.callPackage ./SKSE-AE { })
-        (pkgs.callPackage ./USSEP { })
         (pkgs.callPackage ./SkyrimAE { })
       ];
       ignoreCollisions= true;
